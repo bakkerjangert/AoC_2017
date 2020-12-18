@@ -1,0 +1,39 @@
+Initiation phase
+set b 67
+set c b
+jnz a 2
+jnz 1 5
+mul b 100
+sub b -100000
+set c b
+sub c -17000
+
+Start values
+b = 106700
+c = 123700
+
+set f 1 --> Start Loop 1
+set d 2
+set e 2 --> Start Loop 2
+set g d --> Start Loop 3
+mul g e
+sub g b -- g = d * e - b ---> Note here d == e = 2, 3, 4, ..., b-1, b; thus only when b == prime --> g is never 0
+jnz g 2 --> Check g == 0 (equivalent to  b = d * e) --> set f = 0 if b is not prime
+set f 0
+sub e -1 -- e += 1
+set g e
+sub g b -- g = e - b
+jnz g -8 --> Check g == 0 (equivalent b == e) --> else go to Loop 3
+sub d -1 -- d += 1
+set g d
+sub g b -- g = d - b
+jnz g -13 --> Check g == 0 (equivalent d == b) --> else go to Loop 2
+            at this point holds --> e == b and d == b
+jnz f 2 --> Check f == 0 --> h += 1 (only when b = not prime, see line 20 and 21)
+sub h -1
+set g b
+sub g c -- g = b - c
+jnz g 2 --> Check g == 0 (equivalent b == c) --> Else skip Exit
+jnz 1 3 --> Exit
+sub b -17 -- b += 17
+jnz 1 -23 --> Always go to Loop 1
